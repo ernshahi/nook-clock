@@ -1,3 +1,5 @@
-# CSS is the largest source file, so GitHub was labeling the app as CSS.
-# Keep highlighting, but count Rust and JavaScript in the language bar.
-src/styles.css linguist-detectable=false
+# GitHub labels the repo from the largest detected language.
+# Keep highlighting on every file, and count only JavaScript.
+*.css linguist-detectable=false
+*.html linguist-detectable=false
+*.rs linguist-detectable=false
