@@ -33,15 +33,8 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .lap-list li{font-size:15px;padding:10px 4px;border-bottom:.5px solid rgba(255,255,255,.08)}
 .lap-list li.best{color:#30d158}.lap-list li.worst{color:#ff453a}
 .lap-list::-webkit-scrollbar{width:6px}.lap-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px}
-.actions{width:100%;max-width:560px;display:flex;justify-content:space-between;margin-top:20px}
-.btn{width:84px;height:84px;border-radius:50%;border:0;font-size:16px;font-weight:500;font-family:inherit;cursor:pointer;
-  box-shadow:0 0 0 3px rgba(28,28,30,1),0 0 0 5px currentColor;transition:filter .15s,transform .05s}
-.btn:active{transform:scale(.97)}
-.btn:hover:not(:disabled){filter:brightness(1.12)}
-.secondary{background:#333336;color:#f5f5f7;box-shadow:0 0 0 3px rgba(28,28,30,1),0 0 0 5px #333336}
-.secondary:disabled{color:#7c7c80;cursor:default;filter:none}
-.start{background:rgba(48,209,88,.22);color:#30d158;box-shadow:0 0 0 3px rgba(28,28,30,1),0 0 0 5px rgba(48,209,88,.22)}
-.start.running{background:rgba(255,69,58,.22);color:#ff453a;box-shadow:0 0 0 3px rgba(28,28,30,1),0 0 0 5px rgba(255,69,58,.22)}
+.actions{width:100%;display:flex;margin-top:20px}
+.btn{border-radius:50%;border:0;font-family:inherit;cursor:pointer}
 
 /* ---------- Tabs / segmented control ---------- */
 .segmented{display:flex;padding:2px;border-radius:8px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.06)}
@@ -75,8 +68,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .ring-label{font-size:13px;color:#8e8e93;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ring-time{font:200 clamp(44px,11vw,64px)/1 inherit;font-family:inherit;font-variant-numeric:tabular-nums;letter-spacing:-1px}
 .ring-end{font-size:13px;color:#8e8e93}
-.start.paused{background:rgba(255,159,10,.22);color:#ff9f0a;box-shadow:0 0 0 3px rgba(28,28,30,1),0 0 0 5px rgba(255,159,10,.22)}
-.start:disabled{opacity:.45;cursor:default;filter:none}
+.start.paused{background:rgba(255,159,10,.22);color:#ff9f0a;outline-color:rgba(255,159,10,.22)}
 
 /* ---------- Done overlay ---------- */
 .done{position:absolute;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;z-index:10}
@@ -94,42 +86,25 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 @media (max-height:520px){
   .content{padding:8px 20px 14px}
   .display{margin:6px 0 12px;font-size:clamp(44px,18vh,96px)}
-  .btn{width:64px;height:64px;font-size:14px}
+  .btn{width:72px;height:72px;font-size:14px;outline-offset:3px}
   .timer-setup,.timer-run{gap:12px}
   .ring-wrap{width:min(200px,45vh)}
-  .actions{margin-top:10px}
+  .actions{margin-top:14px;gap:28px}
 }
 @media (max-height:400px){
   .laps,.presets,.label-input{display:none!important}
-  .display{flex:1;display:flex;align-items:center}
-}
-@media (max-height:300px){
-  .titlebar{height:32px}
-  .traffic-lights{top:10px;left:10px}
-  .segmented button{padding:4px 10px;font-size:11px}
-  .content{flex-direction:row;justify-content:center;align-items:center;gap:14px;padding:4px 12px 8px}
-  .display{flex:0 1 auto;margin:0;font-size:clamp(28px,30vh,64px);letter-spacing:-1px}
-  .actions{width:auto;margin:0;gap:8px;flex-direction:row-reverse}
-  .btn{width:auto;height:28px;padding:0 14px;border-radius:14px;font-size:12px;box-shadow:none!important}
-  .timer-setup,.timer-run{flex:0 1 auto;width:auto;gap:0}
-  .step,.field label,.ring,.ring-label,.ring-end{display:none!important}
-  .field input{width:auto;min-width:48px;font-size:clamp(24px,26vh,48px);padding:2px 4px;background:transparent;border-color:transparent}
-  .colon{font-size:clamp(22px,24vh,44px);margin:0}
-  .ring-wrap{width:auto;aspect-ratio:auto}
-  .ring-center{position:static}
-  .ring-time{font-size:clamp(28px,30vh,64px)}
-}
-@media (max-height:300px) and (max-width:420px){
-  .content{flex-direction:column;gap:6px}
 }
 
 /* ---------- Mac Clock–style big timer picker ---------- */
-.picker{gap:0;align-items:flex-end}
-.field{gap:0;position:relative}
+.picker{gap:0;align-items:flex-end;justify-content:center}
+.field{gap:0;position:relative;flex:none}
 .field label{order:-1;font-size:15px;font-weight:500;text-transform:none;letter-spacing:0;color:#98989d;margin-bottom:6px}
 .field input{
-  width:1.25em;font-size:clamp(64px,17vw,132px);font-weight:200;letter-spacing:-2px;
-  background:transparent;border:0;border-radius:12px;padding:0 4px;color:#e5e5ea;caret-color:#0a84ff;
+  /* Wide enough for two tabular digits — 1.25em was clipping into the colons */
+  width:2.05em;min-width:2.05em;box-sizing:content-box;
+  font-size:clamp(56px,14vw,112px);font-weight:200;letter-spacing:0;
+  font-variant-numeric:tabular-nums;text-align:center;
+  background:transparent;border:0;border-radius:12px;padding:0 .08em;color:#e5e5ea;caret-color:#0a84ff;
 }
 .field input:hover{background:rgba(255,255,255,.04)}
 .field input:focus{background:rgba(10,132,255,.12);box-shadow:none;border:0}
@@ -138,17 +113,20 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .step[data-d="1"]{top:-26px}
 .step[data-d="-1"]{bottom:-26px}
 .field:hover .step{opacity:1}
-.colon{font-size:clamp(56px,14vw,110px);font-weight:200;color:#e5e5ea;margin:0 2px;padding-bottom:.08em}
+.colon{
+  flex:none;font-size:clamp(48px,12vw,96px);font-weight:200;color:#e5e5ea;
+  margin:0 .12em;padding-bottom:.1em;line-height:1;
+}
 .timer-setup{gap:34px}
 @media (max-height:520px){
-  .field input{font-size:clamp(48px,20vh,96px)}
-  .colon{font-size:clamp(42px,17vh,80px)}
+  .field input{font-size:clamp(44px,16vh,88px)}
+  .colon{font-size:clamp(38px,14vh,72px)}
   .timer-setup{gap:16px}
 }
 @media (max-height:300px){
   .field label,.step{display:none!important}
-  .field input{font-size:clamp(26px,28vh,56px);letter-spacing:-1px}
-  .colon{font-size:clamp(24px,26vh,52px)}
+  .field input{font-size:clamp(26px,22vh,52px);width:2.1em;min-width:2.1em}
+  .colon{font-size:clamp(22px,20vh,44px);margin:0 .08em}
 }
 
 /* =========================================================
@@ -177,32 +155,51 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .lap-head{font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:rgba(235,235,245,.45)}
 .lap-list li{font-size:14px;color:rgba(255,255,255,.88)}
 
-/* Buttons: centered pair with Apple-style double ring */
-.actions{max-width:340px;justify-content:center;gap:56px;margin:22px auto 0}
+/* Buttons: always below the time, centered as a pair */
+.actions{
+  max-width:280px;width:100%;
+  justify-content:center;align-items:center;
+  gap:36px;margin:28px auto 4px;padding:0;
+}
 .btn{
-  width:76px;height:76px;font-size:15px;font-weight:500;letter-spacing:.1px;
+  position:relative;
+  width:88px;height:88px;flex:none;
+  font-size:15px;font-weight:510;letter-spacing:-.1px;
   box-shadow:none!important;
-  outline:2px solid currentColor;outline-offset:3px;
+  outline:2px solid currentColor;outline-offset:4px;
+  transition:filter .15s ease,transform .12s ease,background-color .15s ease,color .15s ease,outline-color .15s ease;
 }
-.secondary{background:rgba(255,255,255,.12);color:#fff;outline-color:rgba(255,255,255,.12)}
-.secondary:disabled{color:rgba(255,255,255,.35);outline-color:rgba(255,255,255,.08)}
-.start{background:rgba(48,209,88,.20);color:#32d74b;outline-color:rgba(48,209,88,.20)}
-.start.running{background:rgba(255,69,58,.20);color:#ff453a;outline-color:rgba(255,69,58,.20)}
-.start.paused{background:rgba(255,159,10,.20);color:#ff9f0a;outline-color:rgba(255,159,10,.20)}
-.btn:hover:not(:disabled){filter:brightness(1.18)}
+.btn:focus-visible{outline-offset:6px;filter:brightness(1.1)}
+.btn:active:not(:disabled){transform:scale(.94)}
+.btn:hover:not(:disabled){filter:brightness(1.16)}
 
-/* When laps are hidden, keep the time vertically centered */
-@media (max-height:400px){
-  .display{margin:auto 0}
-  .actions{margin-top:0}
-  .content{padding-bottom:22px}
+.secondary{background:rgba(120,120,128,.28);color:rgba(255,255,255,.92);outline-color:rgba(120,120,128,.28)}
+.secondary:disabled{
+  background:rgba(120,120,128,.14);
+  color:rgba(235,235,245,.34);
+  outline-color:rgba(120,120,128,.14);
+  cursor:default;filter:none;
 }
-@media (max-height:300px){
-  .titlebar{height:32px}
-  .traffic-lights{top:10px;left:12px}
-  .segmented button{padding:3px 10px;font-size:11px}
-  .content{padding:4px 14px 8px}
-  .display{margin:0;padding:0;font-size:clamp(28px,30vh,64px)}
-  .actions{gap:8px;margin:0;max-width:none}
-  .btn{width:auto;height:28px;padding:0 14px;border-radius:14px;font-size:12px;outline:none}
+.secondary.reset{background:rgba(120,120,128,.36);color:#fff;outline-color:rgba(120,120,128,.36)}
+
+.start{background:rgba(48,209,88,.22);color:#30d158;outline-color:rgba(48,209,88,.22)}
+.start.running{background:rgba(255,69,58,.22);color:#ff453a;outline-color:rgba(255,69,58,.22)}
+.start.paused{background:rgba(255,159,10,.22);color:#ff9f0a;outline-color:rgba(255,159,10,.22)}
+.start:disabled{opacity:.45;cursor:default;filter:none}
+
+/* Short windows: stay stacked + centered, just scale down */
+@media (max-height:400px){
+  .content{padding:8px 20px 16px;justify-content:center}
+  .display{margin:0 0 16px;padding:0;font-size:clamp(40px,16vh,96px)}
+  .actions{margin:0 auto;gap:28px;max-width:240px}
+  .btn{width:64px;height:64px;font-size:13px;outline-offset:3px}
+}
+@media (max-height:260px){
+  .titlebar{height:36px}
+  .traffic-lights{top:12px;left:14px}
+  .segmented button{padding:4px 12px;font-size:11px}
+  .content{padding:4px 16px 10px}
+  .display{margin:0 0 10px;font-size:clamp(28px,18vh,56px)}
+  .actions{gap:20px;max-width:200px}
+  .btn{width:48px;height:48px;font-size:11px;outline-width:1.5px;outline-offset:2px}
 }

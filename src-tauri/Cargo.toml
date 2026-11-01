@@ -1,12 +1,12 @@
 [package]
-name = "nook"
+name = "nook-clock"
 version = "0.1.0"
 description = "A timer small enough to live in the corner of your screen"
 authors = ["You"]
 edition = "2021"
 
 [lib]
-name = "nook_lib"
+name = "nook_clock"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

@@ -41,9 +41,23 @@ function renderLaps() {
 function swButtons() {
   startBtn.textContent = running ? 'Stop' : 'Start';
   startBtn.classList.toggle('running', running);
-  if (running) { lapBtn.textContent = 'Lap'; lapBtn.disabled = false; }
-  else if (elapsed > 0) { lapBtn.textContent = 'Reset'; lapBtn.disabled = false; }
-  else { lapBtn.textContent = 'Lap'; lapBtn.disabled = true; }
+  startBtn.setAttribute('aria-label', running ? 'Stop' : 'Start');
+  if (running) {
+    lapBtn.textContent = 'Lap';
+    lapBtn.disabled = false;
+    lapBtn.classList.remove('reset');
+    lapBtn.setAttribute('aria-label', 'Lap');
+  } else if (elapsed > 0) {
+    lapBtn.textContent = 'Reset';
+    lapBtn.disabled = false;
+    lapBtn.classList.add('reset');
+    lapBtn.setAttribute('aria-label', 'Reset');
+  } else {
+    lapBtn.textContent = 'Lap';
+    lapBtn.disabled = true;
+    lapBtn.classList.remove('reset');
+    lapBtn.setAttribute('aria-label', 'Lap');
+  }
 }
 function swToggle() {
   if (!running) { startAt = performance.now(); running = true; swRender(); }
@@ -111,7 +125,7 @@ function timerRender() {
   ringFg.style.strokeDashoffset = CIRC * (1 - remain / tTotal);
   if (tState === 'running') {
     $('runEnd').textContent = '🔔 ' + fmtClock(new Date(tEndAt));
-    document.title = fmtRemain(remain) + ' · Nook';
+    document.title = fmtRemain(remain) + ' · Nook Clock';
     if (remain <= 0) timerFinish();
   } else if (tState === 'paused') {
     $('runEnd').textContent = 'Paused';
@@ -141,7 +155,7 @@ function timerPrimary() {
   else { tEndAt = Date.now() + tRemaining; tState = 'running'; tTick = setInterval(timerRender, 100); timerRender(); updateTimerButtons(); }
 }
 function timerCancel() {
-  clearInterval(tTick); tState = 'idle'; document.title = 'Nook'; updateTimerButtons();
+  clearInterval(tTick); tState = 'idle'; document.title = 'Nook Clock'; updateTimerButtons();
 }
 tStart.addEventListener('click', timerPrimary);
 tCancel.addEventListener('click', timerCancel);
@@ -162,7 +176,7 @@ function beep() {
   });
 }
 async function timerFinish() {
-  clearInterval(tTick); tState = 'idle'; document.title = 'Nook';
+  clearInterval(tTick); tState = 'idle'; document.title = 'Nook Clock';
   updateTimerButtons();
   $('doneTitle').textContent = tLabel;
   $('done').classList.remove('hidden');

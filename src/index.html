@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Nook</title>
+  <title>Nook Clock</title>
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
@@ -27,9 +27,9 @@
         <div class="lap-head"><span>Lap</span><span>Split</span><span>Total</span></div>
         <ol class="lap-list" id="lapList"></ol>
       </div>
-      <div class="actions">
-        <button class="btn secondary" id="lap" disabled>Lap</button>
-        <button class="btn start" id="start">Start</button>
+      <div class="actions" role="group" aria-label="Stopwatch controls">
+        <button class="btn secondary" id="lap" disabled aria-label="Lap">Lap</button>
+        <button class="btn start" id="start" aria-label="Start">Start</button>
       </div>
     </section>
 

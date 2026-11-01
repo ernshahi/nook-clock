@@ -1,1 +1,1 @@
-fn main() { nook_lib::run(); }
+fn main() { nook_clock::run(); }
