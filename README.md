@@ -1,6 +1,6 @@
-# Mac Timer — Tauri 2
+# Nook
 
-A small native macOS timer: a lap stopwatch and countdown timers in a frameless, resizable window.
+A timer small enough to live in the corner of your screen. Lap stopwatch and countdown timers, in a frameless window you can shrink down and leave there.
 
 ## Why this exists
 

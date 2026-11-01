@@ -111,7 +111,7 @@ function timerRender() {
   ringFg.style.strokeDashoffset = CIRC * (1 - remain / tTotal);
   if (tState === 'running') {
     $('runEnd').textContent = '🔔 ' + fmtClock(new Date(tEndAt));
-    document.title = fmtRemain(remain) + ' · Timer';
+    document.title = fmtRemain(remain) + ' · Nook';
     if (remain <= 0) timerFinish();
   } else if (tState === 'paused') {
     $('runEnd').textContent = 'Paused';
@@ -141,7 +141,7 @@ function timerPrimary() {
   else { tEndAt = Date.now() + tRemaining; tState = 'running'; tTick = setInterval(timerRender, 100); timerRender(); updateTimerButtons(); }
 }
 function timerCancel() {
-  clearInterval(tTick); tState = 'idle'; document.title = 'Timer'; updateTimerButtons();
+  clearInterval(tTick); tState = 'idle'; document.title = 'Nook'; updateTimerButtons();
 }
 tStart.addEventListener('click', timerPrimary);
 tCancel.addEventListener('click', timerCancel);
@@ -162,7 +162,7 @@ function beep() {
   });
 }
 async function timerFinish() {
-  clearInterval(tTick); tState = 'idle'; document.title = 'Timer';
+  clearInterval(tTick); tState = 'idle'; document.title = 'Nook';
   updateTimerButtons();
   $('doneTitle').textContent = tLabel;
   $('done').classList.remove('hidden');

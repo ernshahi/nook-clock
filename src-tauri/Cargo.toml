@@ -1,12 +1,12 @@
 [package]
-name = "macos-timer"
+name = "nook"
 version = "0.1.0"
-description = "A macOS-style timer"
+description = "A timer small enough to live in the corner of your screen"
 authors = ["You"]
 edition = "2021"
 
 [lib]
-name = "macos_timer_lib"
+name = "nook_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

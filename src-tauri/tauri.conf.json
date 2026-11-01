@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Mac Timer",
+  "productName": "Nook",
   "version": "0.1.0",
-  "identifier": "com.nabinshahi.mactimer",
+  "identifier": "com.nabinshahi.nook",
   "build": {
     "frontendDist": "../src"
   },
@@ -11,7 +11,7 @@
     "macOSPrivateApi": true,
     "windows": [
       {
-        "title": "Stopwatch",
+        "title": "Nook",
         "width": 480,
         "height": 640,
         "minWidth": 240,
