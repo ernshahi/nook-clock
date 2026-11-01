@@ -1,0 +1,3 @@
+# The profile card prints only the largest language. CSS was winning
+# because the stylesheet is the biggest file. Count the app languages instead.
+*.css linguist-detectable=false
