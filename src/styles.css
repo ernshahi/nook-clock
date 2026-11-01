@@ -34,7 +34,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .lap-list li.best{color:#30d158}.lap-list li.worst{color:#ff453a}
 .lap-list::-webkit-scrollbar{width:6px}.lap-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px}
 .actions{width:100%;display:flex;margin-top:20px}
-.btn{border-radius:50%;border:0;font-family:inherit;cursor:pointer}
+.btn{border:0;font-family:inherit;cursor:pointer}
 
 /* ---------- Tabs / segmented control ---------- */
 .segmented{display:flex;padding:2px;border-radius:8px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 .5px rgba(255,255,255,.06)}
@@ -60,7 +60,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .label-input:focus{border-color:#0a84ff;box-shadow:0 0 0 3px rgba(10,132,255,.35)}
 
 /* ---------- Timer running ring ---------- */
-.ring-wrap{position:relative;width:min(300px,70vw);aspect-ratio:1}
+.ring-wrap{position:relative;width:min(280px,70vw,42vh);aspect-ratio:1;max-height:100%}
 .ring{width:100%;height:100%;transform:rotate(-90deg)}
 .ring-bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:8}
 .ring-fg{fill:none;stroke:#ff9f0a;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .1s linear}
@@ -85,11 +85,10 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 /* ---------- Responsive: shrink gracefully to tiny heights ---------- */
 @media (max-height:520px){
   .content{padding:8px 20px 14px}
-  .display{margin:6px 0 12px;font-size:clamp(44px,18vh,96px)}
-  .btn{width:72px;height:72px;font-size:14px;outline-offset:3px}
+  .display{margin:6px 0 12px;font-size:clamp(28px,18vh,96px)}
   .timer-setup,.timer-run{gap:12px}
   .ring-wrap{width:min(200px,45vh)}
-  .actions{margin-top:14px;gap:28px}
+  .actions{margin-top:12px}
 }
 @media (max-height:400px){
   .laps,.presets,.label-input{display:none!important}
@@ -102,7 +101,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .field input{
   /* Wide enough for two tabular digits — 1.25em was clipping into the colons */
   width:2.05em;min-width:2.05em;box-sizing:content-box;
-  font-size:clamp(56px,14vw,112px);font-weight:200;letter-spacing:0;
+  font-size:clamp(22px,min(12vw,18vh),112px);font-weight:200;letter-spacing:0;
   font-variant-numeric:tabular-nums;text-align:center;
   background:transparent;border:0;border-radius:12px;padding:0 .08em;color:#e5e5ea;caret-color:#0a84ff;
 }
@@ -114,19 +113,17 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .step[data-d="-1"]{bottom:-26px}
 .field:hover .step{opacity:1}
 .colon{
-  flex:none;font-size:clamp(48px,12vw,96px);font-weight:200;color:#e5e5ea;
+  flex:none;font-size:clamp(18px,min(10vw,16vh),96px);font-weight:200;color:#e5e5ea;
   margin:0 .12em;padding-bottom:.1em;line-height:1;
 }
 .timer-setup{gap:34px}
 @media (max-height:520px){
-  .field input{font-size:clamp(44px,16vh,88px)}
-  .colon{font-size:clamp(38px,14vh,72px)}
   .timer-setup{gap:16px}
+  .field label{font-size:13px;margin-bottom:4px}
 }
-@media (max-height:300px){
+/* Keep hr / min / sec visible until the window is near its minimum */
+@media (max-height:220px){
   .field label,.step{display:none!important}
-  .field input{font-size:clamp(26px,22vh,52px);width:2.1em;min-width:2.1em}
-  .colon{font-size:clamp(22px,20vh,44px);margin:0 .08em}
 }
 
 /* =========================================================
@@ -144,32 +141,34 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .segmented button:hover:not(.active){color:#fff}
 .segmented button.active{background:rgba(255,255,255,.16);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35),inset 0 .5px 0 rgba(255,255,255,.12)}
 
-.content{padding:12px 28px 26px}
+.content{padding:12px 28px 18px;justify-content:center}
 .display{
   font-weight:200;letter-spacing:-.02em;color:#fff;
-  font-size:clamp(56px,15vw,128px);
-  margin:auto 0 0;padding-top:8px;
+  font-size:clamp(22px,min(15vw,26vh),128px);
+  margin:0;padding-top:4px;
   text-shadow:0 2px 20px rgba(0,0,0,.25);
 }
-.laps{margin-top:22px}
+.laps{margin-top:16px;flex:1}
+.laps:has(.lap-list:empty){display:none}
 .lap-head{font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:rgba(235,235,245,.45)}
 .lap-list li{font-size:14px;color:rgba(255,255,255,.88)}
 
-/* Buttons: always below the time, centered as a pair */
+/* Buttons: Clock-style circles with outer ring (until very minimal height) */
 .actions{
-  max-width:280px;width:100%;
+  width:auto;max-width:none;
   justify-content:center;align-items:center;
-  gap:36px;margin:28px auto 4px;padding:0;
+  gap:28px;margin:18px auto 0;padding:0;
 }
 .btn{
   position:relative;
-  width:88px;height:88px;flex:none;
-  font-size:15px;font-weight:510;letter-spacing:-.1px;
+  flex:none;width:60px;height:60px;
+  border-radius:50%;
+  font-size:13px;font-weight:510;letter-spacing:-.1px;
   box-shadow:none!important;
-  outline:2px solid currentColor;outline-offset:4px;
+  outline:1.5px solid currentColor;outline-offset:3px;
   transition:filter .15s ease,transform .12s ease,background-color .15s ease,color .15s ease,outline-color .15s ease;
 }
-.btn:focus-visible{outline-offset:6px;filter:brightness(1.1)}
+.btn:focus-visible{outline-offset:5px;filter:brightness(1.1)}
 .btn:active:not(:disabled){transform:scale(.94)}
 .btn:hover:not(:disabled){filter:brightness(1.16)}
 
@@ -187,19 +186,32 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent
 .start.paused{background:rgba(255,159,10,.22);color:#ff9f0a;outline-color:rgba(255,159,10,.22)}
 .start:disabled{opacity:.45;cursor:default;filter:none}
 
-/* Short windows: stay stacked + centered, just scale down */
+/* Short but not minimal: slightly smaller circles */
 @media (max-height:400px){
-  .content{padding:8px 20px 16px;justify-content:center}
-  .display{margin:0 0 16px;padding:0;font-size:clamp(40px,16vh,96px)}
-  .actions{margin:0 auto;gap:28px;max-width:240px}
-  .btn{width:64px;height:64px;font-size:13px;outline-offset:3px}
+  .content{padding:6px 18px 12px}
+  .display{margin:0;padding:0;font-size:clamp(28px,min(16vw,22vh),96px)}
+  .actions{margin:12px auto 0;gap:22px}
+  .btn{width:52px;height:52px;font-size:12px;outline-offset:2.5px}
 }
-@media (max-height:260px){
-  .titlebar{height:36px}
-  .traffic-lights{top:12px;left:14px}
-  .segmented button{padding:4px 12px;font-size:11px}
-  .content{padding:4px 16px 10px}
-  .display{margin:0 0 10px;font-size:clamp(28px,18vh,56px)}
-  .actions{gap:20px;max-width:200px}
-  .btn{width:48px;height:48px;font-size:11px;outline-width:1.5px;outline-offset:2px}
+
+/* Very minimal height: compact pills — fixed width, not stretched */
+@media (max-height:220px){
+  .titlebar{height:30px}
+  .traffic-lights{top:9px;left:12px}
+  .segmented button{padding:3px 10px;font-size:11px}
+  .content{padding:2px 12px 6px}
+  .display{font-size:clamp(18px,24vh,36px)}
+  .actions{gap:8px;margin:6px auto 0}
+  .btn{
+    width:72px;height:24px;padding:0 10px;
+    border-radius:12px;font-size:12px;
+    outline:none;
+  }
+  .secondary{background:rgba(255,255,255,.14);color:rgba(255,255,255,.92)}
+  .secondary:disabled{background:rgba(255,255,255,.07);color:rgba(235,235,245,.34)}
+  .secondary.reset{background:rgba(255,255,255,.2)}
+  .start{background:#30d158;color:#04210e}
+  .start.running{background:#ff453a;color:#2b0806}
+  .start.paused{background:#ff9f0a;color:#2a1600}
+  .laps{display:none!important}
 }
