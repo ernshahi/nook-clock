@@ -2,6 +2,12 @@
 
 A timer small enough to live in the corner of your screen. Lap stopwatch and countdown timers, in a frameless window you can shrink down and leave there.
 
+## Download
+
+[Nook Clock 0.1.0](https://github.com/ernshahi/nook-clock/releases/download/v0.1.0/Nook.Clock_0.1.0_aarch64.dmg) for Apple Silicon Macs. Open the disk image and drag the app into Applications.
+
+The build is not notarized. The first launch may need a confirmation in System Settings, then Privacy & Security. All releases are listed on the [releases page](https://github.com/ernshahi/nook-clock/releases).
+
 ## Why this exists
 
 The default macOS Clock app covers too much of the screen, and it cannot be resized small enough to sit in a corner while you keep working. Its minimum size is already large enough to get in the way. This app exists so the timer can shrink down and stay out of the way.
