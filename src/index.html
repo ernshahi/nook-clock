@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Timer</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <main class="window">
+    <header class="titlebar" data-tauri-drag-region>
+      <div class="traffic-lights">
+        <button class="traffic close" id="close" aria-label="Close"><span>×</span></button>
+        <button class="traffic min" id="minimize" aria-label="Minimize"><span>−</span></button>
+        <button class="traffic max" id="maximize" aria-label="Zoom"><span>+</span></button>
+      </div>
+      <nav class="segmented" id="tabs">
+        <button data-tab="stopwatch" class="active">Stopwatch</button>
+        <button data-tab="timers">Timers</button>
+      </nav>
+    </header>
+
+    <!-- STOPWATCH -->
+    <section class="content view" id="view-stopwatch">
+      <div class="display" id="display">00:00.00</div>
+      <div class="laps">
+        <div class="lap-head"><span>Lap</span><span>Split</span><span>Total</span></div>
+        <ol class="lap-list" id="lapList"></ol>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" id="lap" disabled>Lap</button>
+        <button class="btn start" id="start">Start</button>
+      </div>
+    </section>
+
+    <!-- TIMERS -->
+    <section class="content view hidden" id="view-timers">
+      <!-- setup -->
+      <div class="timer-setup" id="timerSetup">
+        <div class="picker">
+          <div class="field"><button class="step" data-f="h" data-d="1">▲</button><input id="inH" type="text" inputmode="numeric" maxlength="2" data-max="23" value="00"/><button class="step" data-f="h" data-d="-1">▼</button><label>hr</label></div>
+          <div class="colon">:</div>
+          <div class="field"><button class="step" data-f="m" data-d="1">▲</button><input id="inM" type="text" inputmode="numeric" maxlength="2" data-max="59" value="10"/><button class="step" data-f="m" data-d="-1">▼</button><label>min</label></div>
+          <div class="colon">:</div>
+          <div class="field"><button class="step" data-f="s" data-d="1">▲</button><input id="inS" type="text" inputmode="numeric" maxlength="2" data-max="59" value="00"/><button class="step" data-f="s" data-d="-1">▼</button><label>sec</label></div>
+        </div>
+        <div class="presets" id="presets">
+          <button data-sec="60">1 min</button><button data-sec="180">3 min</button><button data-sec="300">5 min</button>
+          <button data-sec="600">10 min</button><button data-sec="900">15 min</button><button data-sec="1500">25 min</button>
+          <button data-sec="1800">30 min</button><button data-sec="3600">1 hr</button>
+        </div>
+        <input class="label-input" id="timerLabel" placeholder="Label (optional)" maxlength="40"/>
+      </div>
+      <!-- running -->
+      <div class="timer-run hidden" id="timerRun">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 200 200" class="ring">
+            <circle cx="100" cy="100" r="90" class="ring-bg"/>
+            <circle cx="100" cy="100" r="90" class="ring-fg" id="ringFg"/>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-label" id="runLabel">Timer</div>
+            <div class="ring-time" id="runTime">05:00</div>
+            <div class="ring-end" id="runEnd">🔔 --:--</div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" id="tCancel" disabled>Cancel</button>
+        <button class="btn start" id="tStart">Start</button>
+      </div>
+    </section>
+
+    <!-- DONE overlay -->
+    <div class="done hidden" id="done">
+      <div class="done-card">
+        <div class="done-icon">⏰</div>
+        <div class="done-title" id="doneTitle">Timer done</div>
+        <div class="done-sub">Time's up!</div>
+        <div class="done-actions">
+          <button class="pill" id="doneRepeat">Repeat</button>
+          <button class="pill primary" id="doneStop">Stop</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>
