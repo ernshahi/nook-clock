@@ -1,5 +1,0 @@
-# GitHub labels the repo from the largest detected language.
-# Keep highlighting on every file, and count only JavaScript.
-*.css linguist-detectable=false
-*.html linguist-detectable=false
-*.rs linguist-detectable=false
