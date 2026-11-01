@@ -4,7 +4,7 @@ A small native macOS timer: a lap stopwatch and countdown timers in a frameless,
 
 ## Why this exists
 
-macOS Clock is a system app, so a timer that should sit on the desktop — translucent, resizable, with the traffic-light window — has nowhere to live except as its own app. This project is that app. It follows a macOS stopwatch reference and runs as a Tauri window instead of a browser tab, so it can use native HUD vibrancy, working close / minimize / zoom controls, and a window size that persists between launches.
+The default macOS Clock app covers too much of the screen, and it cannot be resized small enough to sit in a corner while you keep working. Its minimum size is already large enough to get in the way. This app exists so the timer can shrink down and stay out of the way.
 
 The stopwatch records laps. The timer has hour / minute / second pickers, common presets, an optional label, a progress ring, and a chime that brings the window forward when time is up.
 
