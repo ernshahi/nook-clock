@@ -41,3 +41,9 @@ A Tauri 2 desktop app. Rust owns the window and preferences. The timer itself is
 3. `npm run tauri dev`
 
 For a production build: `npm run tauri build`.
+
+## Architecture
+
+[![Nook Clock architecture](architecture.png)](https://gitdiagram.com/ernshahi/nook-clock)
+
+[Open the interactive diagram](https://gitdiagram.com/ernshahi/nook-clock)
